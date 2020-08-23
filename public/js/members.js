@@ -16,10 +16,19 @@ $(document).ready(() => {
     punch(false)
   })
 
+  $("#getPunches").on("click", function() {
+    console.log("punches")
+    getPunches()
+  })
+
+  function getPunches() {
+    $.get(`/api/punches/${userId}`).then(response => console.log(response))
+  }
+
   function punch(inOut) {
     console.log(userId)
     $.post("/api/punch", {
-      userId,
+      userId: parseInt(userId),
       punch: inOut
     })
       .then((res) => {

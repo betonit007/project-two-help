@@ -46,6 +46,18 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
+  //get all punchse
+  app.get("/api/punches/:id", (req, res) => {
+    db.User.findAll({
+      include: {
+        model: db.Punch,
+        where: {
+          userId: req.params.id
+        }
+      }
+    }).then(response => res.json(response))
+  });
+
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", (req, res) => {
     if (!req.user) {
